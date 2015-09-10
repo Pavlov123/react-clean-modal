@@ -1,0 +1,84 @@
+.clean-modal {
+	position: fixed;
+
+	top: 0;
+	left: 0;
+
+	height: 100%;
+	width: 100%;
+	z-index: 100;
+
+	.clean-modal-overlay {
+		background: black;
+		opacity: 0.8;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+	}
+
+
+	.clean-modal-wrapper {
+		position: absolute;
+		max-height: 80%;
+		min-width: 280px;
+		padding: 40px 20px 40px 20px;
+		box-sizing: border-box;
+		background: white;
+
+		top: 50%;
+		left: 50%;
+		width: 30%;
+
+		transform: translate(-50%, -50%);
+		z-index: 2;
+
+		box-shadow: 0 0 20px 0 black;
+		overflow: auto;
+	}
+
+	.clean-modal-close {
+		position: absolute;
+		font-weight: 800;
+
+		height: 32px;
+		width: 32px;
+		font-size: 32px;
+		line-height: 32px;
+
+		right: 4px;
+		top: 4px;
+
+	}
+
+	.action-row {
+		margin-top: 20px;
+	}
+
+	&.confirm-prompt {
+		.confirm, .cancel {
+			.default-button;
+		}
+
+		.cancel {
+			background: #ccc;
+
+			&:hover:not(.disabled) {
+				background-color: darken(#ccc, 10%);
+			}
+		}
+
+		.confirm {
+			background: #3572b0;
+
+			&:hover:not(.disabled) {
+				background-color: darken(#3572b0, 10%);
+			}
+		}
+
+		.cancel + .confirm {
+			margin-left: 10px;
+		}
+	}
+}
