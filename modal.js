@@ -18,6 +18,11 @@ define(['react', 'jquery'], function(React, $){
 			});
 			this.props.onClose();
 		},
+		skip: function() {
+			if (!this.props.noSkip) {
+				this.close();
+			}
+		},
 		is_open: function() {
 			return this.state.open;
 		},
@@ -30,7 +35,7 @@ define(['react', 'jquery'], function(React, $){
 			this.eventName = 'keyup.' + this.lightbox_id;
 			$(window).on(this.eventName, function(event) {
 				if (event.keyCode === 27) {
-					this.close();
+					this.skip();
 				}
 			}.bind(this));
 		},
@@ -39,6 +44,7 @@ define(['react', 'jquery'], function(React, $){
 		},
 		getDefaultProps: function() {
 			return {
+				noSkip: false,
 				openInitial: false,
 				iconclass: '__none__',
 				onClose: function() {},
@@ -77,12 +83,12 @@ define(['react', 'jquery'], function(React, $){
 					D.div(
 						{
 							className: 'clean-modal-close',
-							onClick: this.close
+							onClick: this.skip
 						},
-						'×'
+						this.props.noSkip ? '' : '×'
 					)
 				),
-				D.div({className: 'clean-modal-overlay', onClick: this.close})
+				D.div({className: 'clean-modal-overlay', onClick: this.skip})
 			);
 		}
 	});
