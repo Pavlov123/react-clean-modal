@@ -1,4 +1,13 @@
-define(['react', 'jquery'], function(React, $){
+(function(root, factory) {
+	'use strict';
+	if (typeof define === 'function' && define.amd) {
+		define(['react', 'jquery'], factory);
+	} else if (typeof module === 'object' && module.exports) {
+		module.exports = factory(require('react'), require('jquery'));
+	} else {
+		root.LightBox = factory(root.React, root.jQuery);
+	}
+}(this, function(React, $) {
 	'use strict';
 
 	var D = React.DOM;
@@ -94,4 +103,4 @@ define(['react', 'jquery'], function(React, $){
 	});
 
 	return LightBox;
-});
+}));
