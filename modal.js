@@ -1,18 +1,16 @@
 (function(root, factory) {
 	'use strict';
 	if (typeof define === 'function' && define.amd) {
-		define(['react', 'jquery'], factory);
+		define(['react'], factory);
 	} else if (typeof module === 'object' && module.exports) {
-		module.exports = factory(require('react'), require('jquery'));
+		module.exports = factory(require('react'));
 	} else {
-		root.LightBox = factory(root.React, root.jQuery);
+		root.LightBox = factory(root.React);
 	}
-}(this, function(React, $) {
+}(this, function(React) {
 	'use strict';
 
 	var D = React.DOM;
-
-	var lightbox_id = 1;
 
 	var LightBox = React.createClass({
 		open: function() {
@@ -36,20 +34,16 @@
 			return this.state.open;
 		},
 		componentWillMount: function() {
-			// use jquery event namespaces to avoid removing other events
-			// later
-			this.lightbox_id = lightbox_id;
-			lightbox_id += 1;
-
-			this.eventName = 'keyup.' + this.lightbox_id;
-			$(window).on(this.eventName, function(event) {
+			this.keyupListener = function(event) {
 				if (event.keyCode === 27) {
 					this.skip();
 				}
-			}.bind(this));
+			}.bind(this);
+
+			window.addEventListener('keyup', this.keyupListener);
 		},
 		componentWillUnmount: function() {
-			$(window).off(this.eventName);
+			window.removeEventListener('keyup', this.keyupListener);
 		},
 		getDefaultProps: function() {
 			return {
