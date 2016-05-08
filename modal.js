@@ -86,7 +86,10 @@
 						D.div({className: 'icon ' + this.props.iconclass}),
 						D.span({}, this.props.title)
 					),
-					D.div({className: 'clean-modal-content'}, this.props.children),
+					D.div(
+						{className: 'clean-modal-content'},
+						this.props.children
+					),
 					D.div(
 						{
 							className: 'clean-modal-close',
