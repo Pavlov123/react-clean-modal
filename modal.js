@@ -31,6 +31,10 @@
 			}
 		},
 		is_open: function() {
+			if (typeof this.props.open !== 'undefined') {
+				return this.props.open;
+			}
+
 			return this.state.open;
 		},
 		componentWillMount: function() {
@@ -67,7 +71,7 @@
 				titleClassName = 'hidden';
 			}
 
-			if (!this.state.open) {
+			if (!this.is_open()) {
 				return D.div();
 			}
 
