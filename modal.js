@@ -79,6 +79,10 @@
 				className = className + ' ' + this.props.className;
 			}
 
+			if (this.props.noSkip) {
+				className = className + ' no-skip';
+			}
+
 			return D.div({className: className,},
 				D.div({className: 'clean-modal-wrapper'},
 					D.h1(
